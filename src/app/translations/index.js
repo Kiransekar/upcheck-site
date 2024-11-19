@@ -1,7 +1,6 @@
-import { Language } from './types';
-import { Translation } from './types';
+import React from 'react';
 
-export const translations: Record<Language, Translation> = {
+export const translations = {
   en: {
     title: "Monitor your shrimps",
     subtitle: "Better and Easy",
@@ -12,32 +11,33 @@ export const translations: Record<Language, Translation> = {
     features: {
       realtime: "Real-time Monitoring",
       analytics: "Advanced Analytics",
-      ai: "AI Assistance"
+      ai: "AI Assistance",
     },
     stats: {
       farmers: "1000+ Farmers",
       ponds: "5000+ Ponds",
-      accuracy: "99% Accuracy"
-    }
-  },
-    ta: {
-      title: "உங்கள் இறால்களை கண்காணிக்கவும்",
-      subtitle: "சிறப்பாகவும் எளிதாகவும்",
-      description: "எங்கள் மிக எளிமையான மொபைல் பயன்பாடு மற்றும் சிறந்த கருவிகளுடன், உங்கள் இறால் வளர்ப்பை நேரலையில் கண்காணிக்கவும்",
-      downloadAndroid: "Android-க்காக பதிவிறக்கவும்",
-      downloadIOS: "iOS-க்காக பதிவிறக்கவும்",
-      demoRelease: "டெமோ வெளியீடு வரை (v0.1.1 - 01.10.2024)",
-      features: {
-        realtime: "நேரடி கண்காணிப்பு",
-        analytics: "மேம்பட்ட பகுப்பாய்வு",
-        ai: "AI உதவி"
-      },
-      stats: {
-        farmers: "1000+ விவசாயிகள்",
-        ponds: "5000+ குளங்கள்",
-        accuracy: "99% துல்லியம்"
-      }
+      accuracy: "99% Accuracy",
     },
+  },
+  ta: {
+    title: "உங்கள் இறால்களை கண்காணிக்கவும்",
+    subtitle: "சிறப்பாகவும் எளிதாகவும்",
+    description:
+      "எங்கள் மிக எளிமையான மொபைல் பயன்பாடு மற்றும் சிறந்த கருவிகளுடன், உங்கள் இறால் வளர்ப்பை நேரலையில் கண்காணிக்கவும்",
+    downloadAndroid: "Android-க்காக பதிவிறக்கவும்",
+    downloadIOS: "iOS-க்காக பதிவிறக்கவும்",
+    demoRelease: "டெமோ வெளியீடு வரை (v0.1.1 - 01.10.2024)",
+    features: {
+      realtime: "நேரடி கண்காணிப்பு",
+      analytics: "மேம்பட்ட பகுப்பாய்வு",
+      ai: "AI உதவி",
+    },
+    stats: {
+      farmers: "1000+ விவசாயிகள்",
+      ponds: "5000+ குளங்கள்",
+      accuracy: "99% துல்லியம்",
+    },
+  },
     te: {
       title: "మీ రొయ్యలను పర్యవేక్షించండి",
       subtitle: "మెరుగ్గా మరియు సులభంగా",
@@ -111,4 +111,3 @@ export const translations: Record<Language, Translation> = {
       }
     }
   };
-  
