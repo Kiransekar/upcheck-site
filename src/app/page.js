@@ -13,13 +13,13 @@ import { WaveBackground } from './components/WaveBackground'
 import { FeatureCard } from './components/FeatureCard'
 import { StatCard } from './components/StatCard'
 import { translations } from './translations'
+import Script from 'next/script'
 
 // Announcement Ticker Component
 function AnnouncementTicker({ translations, language }) {
   const [currentAnnouncementIndex, setCurrentAnnouncementIndex] = useState(0)
   const [isVisible, setIsVisible] = useState(true)
 
-  // Collect announcements from translations
   const announcements = [
     translations[language].announcement || "📱 The android version of Upcheck is set to release soon!",
     translations[language].secondAnnouncement || " 📖 You can soon check articles and content in this website!",
@@ -27,31 +27,23 @@ function AnnouncementTicker({ translations, language }) {
     translations[language].fourthAnnouncement || "✨ Your feedback and suggestion is our first priority!",
     translations[language].fifthAnnouncement || "🤝 Connecting India means being multilingual and user friendly!",
     translations[language].sixthAnnouncement || "🚀 Our team is set to launch the first ever affordable multi-lingual aquatech solution",
-    // Add more announcements as needed
   ]
 
   useEffect(() => {
     const announcementCycle = setInterval(() => {
-      // First, fade out the current announcement
       setIsVisible(false)
-
-      // After fade-out, change the announcement and fade back in
       setTimeout(() => {
-        setCurrentAnnouncementIndex((prev) => 
-          (prev + 1) % announcements.length
-        )
+        setCurrentAnnouncementIndex((prev) => (prev + 1) % announcements.length)
         setIsVisible(true)
-      }, 1000) // Match this with fade-out duration
-    }, 6000) // Total cycle time (fade out + pause + fade in)
+      }, 1000)
+    }, 6000)
 
     return () => clearInterval(announcementCycle)
   }, [announcements.length, language])
 
   return (
     <div className="announcement-container">
-      <div className="updates-badge">
-        Updates
-      </div>
+      <div className="updates-badge">Updates</div>
       <div 
         className={`announcement-text ${isVisible ? 'fade-in' : 'fade-out'}`}
         style={{
@@ -160,6 +152,26 @@ export default function Home() {
           </div>
         </div>
       </main>
+
+      {/* Brevo Conversations Chat Widget */}
+      <Script
+        id="brevo-conversations"
+        strategy="lazyOnload"
+        dangerouslySetInnerHTML={{
+          __html: `
+          (function(d, w, c) {
+            w.BrevoConversationsID = '673ce31e5cfa8310a8073180';
+            w[c] = w[c] || function() {
+              (w[c].q = w[c].q || []).push(arguments);
+            };
+            var s = d.createElement('script');
+            s.async = true;
+            s.src = 'https://conversations-widget.brevo.com/brevo-conversations.js';
+            if (d.head) d.head.appendChild(s);
+          })(document, window, 'BrevoConversations');
+        `,
+        }}
+      />
     </div>
   )
 }
