@@ -14,6 +14,56 @@ import { FeatureCard } from './components/FeatureCard'
 import { StatCard } from './components/StatCard'
 import { translations } from './translations'
 
+// Announcement Ticker Component
+function AnnouncementTicker({ translations, language }) {
+  const [currentAnnouncementIndex, setCurrentAnnouncementIndex] = useState(0)
+  const [isVisible, setIsVisible] = useState(true)
+
+  // Collect announcements from translations
+  const announcements = [
+    translations[language].announcement || "📱 The android version of Upcheck is set to release soon!",
+    translations[language].secondAnnouncement || " 📖 You can soon check articles and content in this website!",
+    translations[language].thirdAnnouncement || "🤖 Our AI models keep improving for you!",
+    translations[language].fourthAnnouncement || "✨ Your feedback and suggestion is our first priority!",
+    translations[language].fifthAnnouncement || "🤝 Connecting India means being multilingual and user friendly!",
+    translations[language].sixthAnnouncement || "🚀 Our team is set to launch the first ever affordable multi-lingual aquatech solution",
+    // Add more announcements as needed
+  ]
+
+  useEffect(() => {
+    const announcementCycle = setInterval(() => {
+      // First, fade out the current announcement
+      setIsVisible(false)
+
+      // After fade-out, change the announcement and fade back in
+      setTimeout(() => {
+        setCurrentAnnouncementIndex((prev) => 
+          (prev + 1) % announcements.length
+        )
+        setIsVisible(true)
+      }, 1000) // Match this with fade-out duration
+    }, 6000) // Total cycle time (fade out + pause + fade in)
+
+    return () => clearInterval(announcementCycle)
+  }, [announcements.length, language])
+
+  return (
+    <div className="announcement-container">
+      <div className="updates-badge">
+        Updates
+      </div>
+      <div 
+        className={`announcement-text ${isVisible ? 'fade-in' : 'fade-out'}`}
+        style={{
+          animationName: isVisible ? 'slide-right-to-updates' : 'fade-out-to-updates'
+        }}
+      >
+        {announcements[currentAnnouncementIndex]}
+      </div>
+    </div>
+  )
+}
+
 export default function Home() {
   const [language, setLanguage] = useState('en')
   const [mounted, setMounted] = useState(false)
@@ -65,6 +115,9 @@ export default function Home() {
         </div>
       </header>
 
+      {/* Announcement Ticker */}
+      <AnnouncementTicker translations={translations} language={language} />
+
       <main className="container mx-auto px-4 py-12 relative">
         <div className="flex flex-col items-center text-center space-y-8 max-w-4xl mx-auto">
           <div className="space-y-6">
@@ -99,11 +152,9 @@ export default function Home() {
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mt-16 w-full">
-            {[
-              { Icon: Timer, title: t.features.realtime },
-              { Icon: BarChart2, title: t.features.analytics },
-              { Icon: Bot, title: t.features.ai }
-            ].map(({ Icon, title }, index) => (
+            {[{ Icon: Timer, title: t.features.realtime },
+            { Icon: BarChart2, title: t.features.analytics },
+            { Icon: Bot, title: t.features.ai }].map(({ Icon, title }, index) => (
               <FeatureCard key={index} Icon={Icon} title={title} />
             ))}
           </div>
