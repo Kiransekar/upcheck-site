@@ -28,7 +28,7 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "src/app/translations/index.js"  ],
   "exclude": [
     "node_modules"
   ]
